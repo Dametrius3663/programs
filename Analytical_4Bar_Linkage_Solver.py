@@ -64,13 +64,13 @@ def draw_linkage(a, b, c, d, deg2, deg3, deg4, config_name):
     ax.grid(True, alpha=0.3)
     ax.axhline(y=0, color='k', linewidth=0.5)
     ax.axvline(x=0, color='k', linewidth=0.5)
-    
+        
     # Labels and title
     ax.set_xlabel('Distance (mm)', fontsize=12)
     ax.set_ylabel('Distance (mm)', fontsize=12)
     ax.set_title(f'4-Bar Linkage - {config_name}\n(deg2={deg2:.2f}°, deg3={deg3:.2f}°, deg4={deg4:.2f}°)', fontsize=14)
     ax.legend(loc='upper left', fontsize=10)
-    
+        
     plt.tight_layout()
     return fig
 
@@ -93,6 +93,12 @@ F = K1 + (K4 - 1) * cosd(deg2) + K5
 # Discriminants
 disc4 = B**2 - 4 * A * C
 disc3 = E**2 - 4 * D * F
+
+# Is it a Grashoff linkage?
+if (a + b) <= (c + d):
+    print("\nThis is a Grashoff linkage - at least one link can fully rotate.")
+else:
+    print("\nThis is a non-Grashoff linkage - no link can fully rotate.")
 
 # Solve for deg4
 if disc4 >= 0:
